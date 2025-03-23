@@ -36,7 +36,8 @@ dependencies = [
     "python-dateutil==2.9.0.post0",
     "setuptools==75.8.0",
     "six==1.17.0",
-    "wheel==0.45.1"
+    "wheel==0.45.1",
+    "ipykernel==6.29.5"
 ]
 
 [project.urls]
