@@ -13,11 +13,11 @@
 Note: this is an extremely minimalist readme, but the code is highly documented and will get built out over the coures of assignment 3.
 
 ```bash
-conda create --name finite-element-analysis-env python=3.12.9
+conda create --name me700-hw3-env python=3.12.9
 ```
 
 ```bash
-conda activate finite-element-analysis-env
+conda activate me700-hw3-env
 ```
 
 ```bash
@@ -33,6 +33,6 @@ pip install -e .
 ```
 
 ```bash
-pytest -v --cov=finiteelementanalysis --cov-report term-missing
+pytest -v --cov=. --cov-report term-missing
 ```
 
