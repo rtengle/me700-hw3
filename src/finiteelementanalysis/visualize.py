@@ -75,7 +75,7 @@ def plot_mesh_2D(fname: str, ele_type: str, coords: np.ndarray, connect: np.ndar
     return
 
 
-def make_deformation_gif(analytic_solution, displacements_all, coords, connect, ele_type, gif_path, magnification=1.0, interval=500):
+def make_deformation_gif(displacements_all, coords, connect, ele_type, gif_path, magnification=1.0, interval=500, analytic_solution=None):
     """
     Create an animated GIF showing the deformation progression of a 2D mesh with displacement magnitude colormap.
 
@@ -155,15 +155,17 @@ def make_deformation_gif(analytic_solution, displacements_all, coords, connect, 
         coords_def = coords + magnification * disp
         disp_mag = np.linalg.norm(disp, axis=1)
 
-        x = np.linspace(0, 10, 50)
-        y = analytic_solution(x, load_factor)
+
+        x = np.linspace(coords[:, 0].min(), coords[:, 0].max(), 50)
+        if analytic_solution is not None:
+            y = analytic_solution(x, load_factor)
+            analytic.set_data(x, y)
 
         for a, b, line in mesh_lines:
             line.set_data([coords_def[a, 0], coords_def[b, 0]], [coords_def[a, 1], coords_def[b, 1]])
 
         scatter.set_offsets(coords_def)
         scatter.set_array(disp_mag)
-        analytic.set_data(x, y)
 
         title_text.set_text(f"{ele_type}  |  Frame {frame_idx + 1} of {len(displacements_all)}")
         return [line for _, _, line in mesh_lines] + [scatter, title_text]
